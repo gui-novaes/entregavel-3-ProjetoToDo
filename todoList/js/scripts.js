@@ -2,38 +2,95 @@
 
 class ToDo {
 
+  // CRIANDO PROPRIEDADES DA CLASSE
+  Texto // string
+  Prioridade = Number()//string
+  Feito = false //boolean
+
+  // CRIANDO CONSTRUTOR
+  constructor(texto, prioridade){
+    this.Texto = texto
+    this.Prioridade = prioridade
+  }
+
 }
 
 // Array
-
+let textoAntigo;
+let arrayTodos = [];
 
 //funções projeto
 
-function CriarToDo() {
-
+function CriarToDo(texto, prioridade, arrayTodos) {
+  // essa função deve criar um novo objeto ToDo e verificar se ele já existe dentro do array recebido; (usar 'some')
+  let objetoToDo = new ToDo(texto, prioridade) // criação do objeto passando os parâmetros 'texto' e 'prioridade'
+  textoAntigo = texto
+  if(!arrayTodos.some(item => item.Texto == texto))  //  se não tiver nenhuma prioridade Texto igual ao texto passado no parâmetro, adiciona o objeto ao array
+    arrayTodos.push(objetoToDo)
+  return objetoToDo
 }
 
-function AtualizarToDo() {
-
+function AtualizarToDo(textoAntigo, novoTexto, arrayTodos) {
+  // essa função deve pesquisar o objeto ToDo dentro do array que tenha o Texto igual ao textoAntigo recebido;
+  const textoJaExiste = arrayTodos.some(t => t.Texto === textoAntigo)
+  let posTextoExistente = arrayTodos.findIndex(i => i.Texto === textoAntigo)
+  if(textoJaExiste){
+    arrayTodos[posTextoExistente].Texto = novoTexto
+    return true
+  }else{
+    console.log('texto não encontrado')
+    return false
+  }
 }
 
-function ConcluirToDo() {
-
+function ConcluirToDo(arrayTodos, texto) {
+  // essa função deve pesquisar o objeto ToDo dentro do array que tenha o Texto igual ao texto recebido;
+  const encontrarTarefa = arrayTodos.some(task => task.Texto === texto)
+  let posConcluirTarefa = arrayTodos.findIndex(p => p.Texto === texto)
+  if(encontrarTarefa){
+    arrayTodos[posConcluirTarefa].Feito = true
+    return true
+  }else{
+    console.log('Tarefa não encontrada')
+    return false
+  }
 }
 
-function ExcluirToDo() {
+function ExcluirToDo(arrayTodos, texto) {
+  // essa função deve pesquisar o objeto ToDo dentro do array que tenha o Texo igual ao texto recebido;
 
+  const encontrarTaskParaExcluir = arrayTodos.some(task => task.Texto === texto);
+  let posExcluirTask = arrayTodos.findIndex(i => i.Texto === texto)
+  if(encontrarTaskParaExcluir){
+    arrayTodos.splice(posExcluirTask, 1)
+    return true
+  }else{
+    console.log('Tarefa não encontrada para excluir')
+    return false
+  }
 }
 
-function PesquisarToDo() {
- 
+function PesquisarToDo(arrayTodos, texto) {
+  // essa função deve pesquisar os objetos ToDos que contenham o texto recebido no seu Texto;
+
+  const pesquisarTask = arrayTodos.some(task => task.Texto === texto);
+  if(pesquisarTask){
+    return true
+  }else{
+    return false
+  }
 }
 
-function OrdenarCrescente() {
-  
+
+// NÃO TA FUNCIONANDO DIREITO, SÓ FALTA ISSO, CONCLUIR ATÉ DOMINGO NO MÁXIMO
+function OrdenarCrescente(arrayTodos) {
+  // essa função deve ordernar os ToDos em ordem crescente de prioridade (1 => 2 => 3); 
+  return [...arrayTodos].sort((a, b) => a.Prioridade - b.Prioridade); 
 }
-function OrdenarDecrescente() {
-  
+
+function OrdenarDecrescente(arrayTodos) {
+  // essa função deve ordenar os ToDos em ordem descrescente de prioridade (3 => 2 => 1);
+  return [...arrayTodos].sort((a, b) => b.Prioridade - a.Prioridade);
 }
 
 // Seleção de elementos
