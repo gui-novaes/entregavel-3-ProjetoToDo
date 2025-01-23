@@ -81,8 +81,6 @@ function PesquisarToDo(arrayTodos, texto) {
   }
 }
 
-
-// NÃO TA FUNCIONANDO DIREITO, SÓ FALTA ISSO, CONCLUIR ATÉ DOMINGO NO MÁXIMO
 function OrdenarCrescente(arrayTodos) {
   // essa função deve ordernar os ToDos em ordem crescente de prioridade (1 => 2 => 3); 
   return [...arrayTodos].sort((a, b) => a.Prioridade - b.Prioridade); 
